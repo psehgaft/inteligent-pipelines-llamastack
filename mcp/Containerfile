@@ -1,0 +1,16 @@
+FROM registry.fedoraproject.org/fedora
+RUN dnf install -y python pip && \
+    dnf clean all && \
+    rm -rf /var/cache/dnf/*
+
+RUN cd /usr/bin &&\
+    curl -L https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/oc.tar.gz -o - | tar -zxv
+
+RUN pip install "mcp[cli]" openshift-client
+
+ADD --chmod=777 tekton_mcp_server /opt/tekton_mcp_server
+WORKDIR /opt/tekton_mcp_server
+
+EXPOSE 8080
+
+CMD python mcp_server.py
