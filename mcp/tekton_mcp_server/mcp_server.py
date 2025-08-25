@@ -29,12 +29,12 @@ def get_failed_pipelinerun_ratio(namespace: str, pipeline: str) -> float:
     return opi.get_failed_run_ratio(namespace, pipeline)
 
 @mcp.tool(structured_output = True)
-def get_pipelines(namespace: str, pipelinerun: str) -> str:
+def get_task_runs(namespace: str, pipelinerun: str) -> str:
     """Get TaskRuns for a specified PipelineRun"""
     return json.dumps(opi.list_task_runs(namespace, pipelinerun), default=lambda o : o.__dict__)
 
 @mcp.tool(structured_output = True)
-def get_pipelines(namespace: str, pipelinerun: str) -> str:
+def get_failed_tr_logs(namespace: str, pipelinerun: str) -> str:
     """Get the logs for failed TaskRuns for a specified PipelineRun"""
     return json.dumps(opi.get_failed_task_run_logs(namespace, pipelinerun), default=lambda o : o.__dict__)
 
