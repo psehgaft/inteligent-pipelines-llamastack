@@ -43,6 +43,4 @@ def get_failed_tr_logs(namespace: str, pipelinerun: str) -> str:
 if __name__ == "__main__":
     mcp.settings.host = os.environ.get("MCP_HOST", "*")
     mcp.settings.port = int(os.environ.get("MCP_PORT", "8080"))
-    "http://{host}:{port}/mcp"
     mcp.run(transport = "streamable-http")
-
